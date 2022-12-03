@@ -1,0 +1,27 @@
+services:
+  mysqldb:
+    image: mariadb:latest
+    container_name: dbtreeskills
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_DATABASE: treeofskills
+      MYSQL_PASSWORD: 123456789
+    volumes:
+      - dbtreeskills:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: pms
+    links:
+      - mysqldb
+    environment:
+      PMA_HOST: mysqldb
+      PMA_PORT: 3306
+    restart: always
+    ports:
+      - 8082:80
+
+volumes:
+  dbtreeskills:
