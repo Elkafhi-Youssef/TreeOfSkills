@@ -1,5 +1,7 @@
 package com.skills.treeofskills.config;
 
+import com.skills.treeofskills.dao.StudentDao;
+import com.skills.treeofskills.dao.StudentDaoImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -49,7 +51,9 @@ public class AppConfig {
 
         return factoryBean;
     }
-
+    public StudentDao studentDao() {
+        return new StudentDaoImp();
+    }
     @Bean
     public HibernateTransactionManager getTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
