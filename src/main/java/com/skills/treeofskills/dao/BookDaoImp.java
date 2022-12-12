@@ -11,8 +11,12 @@ import java.util.List;
 @Repository
 public class BookDaoImp implements BookDao{
 
-    @Autowired
+
     private SessionFactory sessionFactory;
+    @Autowired
+    public BookDaoImp(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public long save(Book book) {

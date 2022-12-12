@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class BookServiceImp implements BookService{
-    @Autowired
+
     private BookDao bookDao;
+    @Autowired
+    public BookServiceImp(BookDao bookDao) {
+        this.bookDao = bookDao;
+    }
 
     @Transactional
     @Override

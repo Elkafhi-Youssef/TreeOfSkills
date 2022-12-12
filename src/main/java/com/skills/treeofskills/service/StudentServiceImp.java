@@ -11,11 +11,15 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class StudentServiceImp implements StudentService{
-//    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")// I have used this for @Autowired not working
+    //    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")// I have used this for @Autowired not working
+
     @Autowired
     private StudentDao studentDao;
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
+    public StudentServiceImp(StudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
+
     private Student student;
     @Override
     public long save(Student student) {
@@ -43,7 +47,8 @@ public class StudentServiceImp implements StudentService{
     }
     @Override
     public String login(String email) {
-        student = studentDao.findByEmail("youssefelkafhi@gmail.com");
+        this.student = new Student();
+        this.student = studentDao.findByEmail("youssefelkafhi@gmail.com");
         return student.getEmail();
     }
 }

@@ -11,9 +11,13 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
-public class BookController {
-    @Autowired
+public class AuthhController {
+
     private BookService bookService;
+    @Autowired
+    public AuthhController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     /*---Add new book---*/
     @PostMapping("/book")
@@ -48,5 +52,10 @@ public class BookController {
     public ResponseEntity<?> delete(@PathVariable("id") long id) {
         bookService.delete(id);
         return ResponseEntity.ok().body("Book has been deleted successfully.");
+    }
+    @RequestMapping("/login")
+    public ResponseEntity<?> sayHello() {
+
+        return ResponseEntity.ok().body("New Book has been saved with ID:");
     }
 }
