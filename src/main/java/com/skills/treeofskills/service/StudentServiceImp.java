@@ -46,9 +46,15 @@ public class StudentServiceImp implements StudentService{
 
     }
     @Override
-    public String login(String email) {
+    public Student login(String email, String password) {
         this.student = new Student();
-        this.student = studentDao.findByEmail("youssefelkafhi@gmail.com");
-        return student.getEmail();
+        this.student = studentDao.findByEmail(email);
+//        return this.student;
+        if (this.student != null) {
+            if (this.student.getPassword().equals(password)){
+                return this.student;
+            }else return null;
+
+        }else return null;
     }
 }

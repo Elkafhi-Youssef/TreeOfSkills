@@ -12,5 +12,5 @@ public interface StudentService {
     void update(int id, Student sudent);
     void delete(int id);
 
-    String login(String email );
+    Student login(String email, String password );
 }

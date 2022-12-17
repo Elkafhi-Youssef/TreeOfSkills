@@ -79,4 +79,17 @@ public class Student {
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", fullName='" + fullName + '\'' +
+                ", year='" + year + '\'' +
+                ", className='" + className + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", skills=" + skills +
+                '}';
+    }
 }
