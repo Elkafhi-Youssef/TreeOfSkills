@@ -1,13 +1,11 @@
 package com.skills.treeofskills.outuls;
 
-import com.skills.treeofskills.model.Student;
 
-import java.util.List;
 
-public class ResponceObject {
+    public class ResponseLogin {
     private Boolean success;
     private String message;
-    private Student student;
+    private GetStudentLogin student;
 
     public Boolean getSuccess() {
         return success;
@@ -25,11 +23,11 @@ public class ResponceObject {
         this.message = message;
     }
 
-    public Student getStudent() {
+    public GetStudentLogin getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(GetStudentLogin student) {
         this.student = student;
     }
 }

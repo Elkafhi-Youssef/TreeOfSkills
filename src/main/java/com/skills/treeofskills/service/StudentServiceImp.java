@@ -2,10 +2,15 @@ package com.skills.treeofskills.service;
 
 import com.skills.treeofskills.dao.StudentDao;
 import com.skills.treeofskills.model.Student;
+import com.skills.treeofskills.outuls.GetStudentLogin;
+import com.skills.treeofskills.outuls.ResponseLogin;
+import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @Service
@@ -46,15 +51,28 @@ public class StudentServiceImp implements StudentService{
 
     }
     @Override
-    public Student login(String email, String password) {
+    public ResponseLogin login(String email, String password) throws InvocationTargetException, IllegalAccessException {
+        ResponseLogin response = new ResponseLogin();
+        GetStudentLogin studentinfo = new GetStudentLogin();
         this.student = new Student();
         this.student = studentDao.findByEmail(email);
-//        return this.student;
         if (this.student != null) {
+            Hibernate.initialize(this.student.getSkills());
+            BeanUtils.copyProperties(studentinfo, this.student);
             if (this.student.getPassword().equals(password)){
-                return this.student;
-            }else return null;
-
-        }else return null;
+                response.setSuccess(true);
+                response.setMessage("login successful");
+                response.setStudent(studentinfo);
+                return response;
+            }else {
+                response.setSuccess(false);
+                response.setMessage("password incorrect");
+                return response;
+            }
+        }else {
+            System.out.println("email not found");
+            response.setSuccess(false);
+            response.setMessage("the email does not exist");
+            return response;}
     }
 }

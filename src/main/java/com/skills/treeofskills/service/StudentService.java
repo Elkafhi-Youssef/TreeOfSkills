@@ -1,8 +1,9 @@
 package com.skills.treeofskills.service;
 
-import com.skills.treeofskills.model.Book;
 import com.skills.treeofskills.model.Student;
+import com.skills.treeofskills.outuls.ResponseLogin;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface StudentService {
@@ -12,5 +13,5 @@ public interface StudentService {
     void update(int id, Student sudent);
     void delete(int id);
 
-    Student login(String email, String password );
+    ResponseLogin login(String email, String password ) throws InvocationTargetException, IllegalAccessException;
 }
